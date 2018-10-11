@@ -4,12 +4,31 @@
 
 using namespace std;
 
+void displayIntro();
+
+string GetGuess();
+
 int main() {
+	displayIntro();
+
+	string Guess = "";
+	Guess = GetGuess();
+
+
+	char holdChar = getchar();
+	return 420;
+
+
+}
+
+void displayIntro() {
 	const int WORD_LENGTH = 5;
 	cout << "Welcome to Bulls and Cows, a word game!\n";  //introduce the game
 	cout << "Can you guess the " << WORD_LENGTH;
 	cout << " letter isogram I'm thinking of?\n";
+}
 
+string GetGuess() {
 	//get a guess from the player
 	string Guess = "";
 	cout << "Enter a Guess: ";
@@ -20,9 +39,6 @@ int main() {
 	cout << "You've entered: ";
 	cout << Guess << endl;
 
-
-	Guess = getchar();
-	return 420;
-
-
+	//return guess to calling function
+	return Guess;
 }
