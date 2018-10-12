@@ -69,13 +69,13 @@ void playGame() {
 bool AskToPlayAgain() {
 	cout << "Would you like to play again? (y/n)\n";
 	while (true) {
-		string playerResponse = "";
-		getline(cin, playerResponse);
+		string response = "";
+		getline(cin, response);
 		cout << endl;
-		if (playerResponse[0] == ('y' || 'Y')) {
+		if ((response[0] == 'y') || (response[0] == 'Y')) {
 			return true;
 		}
-		else if (playerResponse[0] == ('n' || 'N')) {
+		else if ((response[0] == 'n') || (response[0] == 'N')) {
 			return false;
 		}
 		cout << "please enter (y/n)\n";
