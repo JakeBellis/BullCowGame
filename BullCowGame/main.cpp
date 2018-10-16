@@ -9,6 +9,8 @@ void printGuess(std::string);
 void playGame();
 bool AskToPlayAgain();
 
+FBullCowGame BCGame = FBullCowGame();
+
 int main() {
 	bool wantToPlay = true; //play the game the first time
 
@@ -56,12 +58,13 @@ void playGame() {
 	std::string Guess = "";
 
 	//give user certain number of guesses
-	const int NUMBER_OF_GUESSES = 5;
+	const int NUMBER_OF_GUESSES = BCGame.GetMaxTries();
 
 	for (int i = 0; i < NUMBER_OF_GUESSES; i++) {
 		Guess = GetGuess();
 		printGuess(Guess);
-		std::cout << "Guess Number: " << i + 1 << "\n";
+		BCGame.IncrementTries();
+		std::cout << "Guess Number: " << BCGame.GetCurrentTry() << "\n";
 	}
 
 	std::cout << "OUT OF GUESSES!\n";
