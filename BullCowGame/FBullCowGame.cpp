@@ -1,24 +1,28 @@
 #include "FBullCowGame.h"
 
 
+using FString = std::string;
+using int32 = int;
+
 FBullCowGame::FBullCowGame()
 {
-	MyCurrentTry = 0;
-	MyMaxTries = 5;
-
+	Reset();
 }
 
 void FBullCowGame::Reset()
 {
+	const int32 MAX_TRIES = 8;
+	MyCurrentTry = 1;
+	MyMaxTries = MAX_TRIES;
 	return;
 }
 
-int FBullCowGame::GetMaxTries()
+int32 FBullCowGame::GetMaxTries() const
 {
 	return MyMaxTries;
 }
 
-int FBullCowGame::GetCurrentTry()
+int32 FBullCowGame::GetCurrentTry() const
 {
 	return MyCurrentTry;
 }
@@ -29,7 +33,7 @@ void FBullCowGame::IncrementTries()
 	return;
 }
 
-bool FBullCowGame::IsGameWon()
+bool FBullCowGame::IsGameWon() const
 {
 	return false;
 }
@@ -38,8 +42,18 @@ bool FBullCowGame::CheckGuessValidity(std::string)
 {
 	return false;
 }
+//receives a valid guess, increments turn and return counts
+BullCowCount FBullCowGame::SubmitGuess(std::string) const
+{
+	return BullCowCount();
+}
 
-int * FBullCowGame::GetBullsAndCows(std::string)
+bool FBullCowGame::CheckGuessValidity(FString)
+{
+	return false;
+}
+
+int32 * FBullCowGame::GetBullsAndCows(FString) const
 {
 	return nullptr;
 }
