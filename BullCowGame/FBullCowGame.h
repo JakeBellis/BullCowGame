@@ -8,6 +8,7 @@ struct FBullCowCount {
 	int32 Bulls = 0;
 	int32 Cows = 0;
 };
+
 class FBullCowGame {
 
 public:
@@ -19,7 +20,7 @@ public:
 	int32 GetWordLength() const;
 	void IncrementTries();
 	bool IsGameWon() const;
-	bool CheckGuessValidity(FString);
+	bool IsGuessValid(FString);
 	//TODO provide a method for counting bulls and cows and increasing turn number
 	FBullCowCount SubmitGuess(FString);
 	
