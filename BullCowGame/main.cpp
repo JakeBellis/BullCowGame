@@ -17,14 +17,16 @@ void printGuess(FText);
 void playGame();
 bool AskToPlayAgain();
 
-FBullCowGame BCGame = FBullCowGame();
+FBullCowGame BCGame = FBullCowGame(true);
 
 int main() {
 	bool wantToPlay = true; //play the game the first time
-
-	displayIntro();
+	std::cout << "Welcome to Bulls and Cows, a word game!\n";
+	
 
 	while (wantToPlay == true) {
+		BCGame = FBullCowGame(); //resets the game
+		displayIntro();
 		playGame();
 		wantToPlay = AskToPlayAgain();
 	}
@@ -35,8 +37,8 @@ int main() {
 
 void displayIntro() {
 	//introduce the game
-	const int32 WORD_LENGTH = BCGame.GetWordLength();
-	std::cout << "Welcome to Bulls and Cows, a word game!\n";  
+	const int32 WORD_LENGTH = BCGame.GetHiddenWordLength();
+	 
 	std::cout << "Can you guess the " << WORD_LENGTH;
 	std::cout << " letter isogram I'm thinking of?\n";
 }
@@ -67,19 +69,18 @@ void printGuess(FText guess) {
 
 void playGame() {
 
-	FBullCowGame BCGame = FBullCowGame();
+	//FBullCowGame BCGame = FBullCowGame();
 	FText Guess = "";
 
 	//give user certain number of guesses
 	const int32 NUMBER_OF_GUESSES = BCGame.GetMaxTries();
 
 	//for (int32 i = 0; i < NUMBER_OF_GUESSES; i++) {
-	while(BCGame.GetCurrentTry() < NUMBER_OF_GUESSES){
+	while (BCGame.GetCurrentTry() < NUMBER_OF_GUESSES) {
 		std::cout << "Guess Number: " << BCGame.GetCurrentTry() << std::endl;
 		Guess = GetGuess();
-		//TODO check validity of guess
 		//submit guess 
-		if (BCGame.IsGuessValid(Guess)) {
+		if (BCGame.VerifyGuess(Guess) == EWordStatus::OK) {
 			FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 
 			//print number of bulls and cows
@@ -87,12 +88,15 @@ void playGame() {
 			std::cout << "Bulls = " << BullCowCount.Bulls << std::endl;
 			std::cout << "Cows = " << BullCowCount.Cows << std::endl;
 			std::cout << std::endl;
+			if (BCGame.IsGameWon(BullCowCount.Bulls)) {
+				break;
+			}
 			BCGame.IncrementTries();
 		}
+		
 	}
+	BCGame.SummarizeGame();
 	
-	std::cout << "OUT OF GUESSES!\n";
-	//TODO Summarize game
 }
 
 bool AskToPlayAgain() {
